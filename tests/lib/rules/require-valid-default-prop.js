@@ -181,6 +181,18 @@ ruleTester.run('require-valid-default-prop', rule, {
         }
       }`,
       parserOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `export default {
+        props: {
+          foo: {
+            type: Number,
+            default: Number?.()
+          }
+        }
+      }`,
+      parserOptions
     }
   ],
 
@@ -742,6 +754,19 @@ ruleTester.run('require-valid-default-prop', rule, {
           line: 11
         }
       ]
+    },
+    {
+      filename: 'test.vue',
+      code: `export default {
+        props: {
+          foo: {
+            type: String,
+            default: Number?.()
+          }
+        }
+      }`,
+      parserOptions,
+      errors: errorMessage('string')
     }
   ]
 })
